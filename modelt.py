@@ -94,7 +94,7 @@ def bulid_model(input_shape=(2048, 1024, 3)):
     classifier = BatchNormalization()(classifier)
     classifier = Activation('relu')(classifier)
     ## num classes.....
-    classifier = conv_block(classifier,'conv',151,(1,1),strides=(1,1),padding='same',relu=False)
+    classifier = conv_block(classifier,'conv',21,(1,1),strides=(1,1),padding='same',relu=False)
     classifier = Dropout(0.3)(classifier)
     classifier = UpSampling2D((8,8))(classifier)
     #classifier = Activation('softmax')(classifier)

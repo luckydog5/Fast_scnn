@@ -22,8 +22,8 @@ if __name__ == '__main__':
     #model.summary()
     folder = '/home/zsh/Fast_scnn/'
     train_images, train_annotations, val_images, val_annotations = get_filenames(folder)
-    batch_size = 8
-    num_classes = 151
+    batch_size = 16
+    num_classes = 21
     image_size = [256,256]
     train_dataset = Dataset(
         image_size=image_size,
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     )
     epochs = 400
     checkpoint = ModelCheckpoint(filepath='weights/weights-{epoch:03d}-{loss:.2f}.h5',monitor='loss',save_best_only=False,save_weights_only=True)
-    lr_reducer = ReduceLROnPlateau(monitor='loss',factor=0.5,cooldown=0,patience=5,min_lr=1e-7)
+    lr_reducer = ReduceLROnPlateau(monitor='loss',factor=0.9,cooldown=0,patience=5,min_lr=1e-7)
     #######################
     ## change learning rate schedule....
     optimizer = SGD(momentum=0.9,lr=0.045)
@@ -60,4 +60,4 @@ if __name__ == '__main__':
         except Exception as e:
             print('Error {}'.format(e))
 
-    H = model.fit_generator(generator=train_dataset,validation_data=val_dataset,epochs=epochs,initial_epoch=163,callbacks=[checkpoint,lr_schedule])
+    H = model.fit_generator(generator=train_dataset,validation_data=val_dataset,epochs=epochs,initial_epoch=0,callbacks=[checkpoint,lr_schedule])
