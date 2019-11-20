@@ -13,3 +13,7 @@ When classes number = 21, thing seams good and ideal. But i think it still has c
 
 issue.
 
+
+
+
+400 epochs acc:0.68 val_acc:0.51
