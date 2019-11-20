@@ -5,7 +5,7 @@ import glob
 import numpy as np 
 import matplotlib.pyplot as plt
 import cv2
-
+import keras.backend as K 
 img_shape = (256,256,3)
 model = bulid_model(img_shape)
 model.summary()
@@ -19,6 +19,9 @@ image_path = 'ADEChallengeData2016/images/training/ADE_train_00000693.jpg'
 weights_path = 'weights/weights-163-1.78.h5'
 gt_ = 'ADEChallengeData2016/annotations/training/ADE_train_00000693.png'
 model.load_weights(weights_path)
+## Get current learning rate 
+#print("model optimizer: {}".format(model.optimizer))
+#print("Current lr: {}".format(K.eval(model.optimizer.lr)))
 img_gt = image.load_img(gt_,target_size=(img_h,img_w))
 img_gt = image.img_to_array(img_gt)
 #img_gt = img_gt[:,:,0]
